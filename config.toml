@@ -8,11 +8,14 @@ enableEmoji = true
 
 [menu]
   [[menu.main]]
+  	identifier = "2013"
     name = "2013"
     url = "/2013/"
   [[menu.main]]
+    identifier = "2014"
     name = "2014"
     url = "/2014/"
   [[menu.main]]
+    identifier = "2018"
     name = "2018"
     url = "/2018/"
