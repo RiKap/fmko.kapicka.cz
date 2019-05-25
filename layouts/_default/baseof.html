@@ -1,0 +1,20 @@
+<!doctype html>
+<html class="no-js" lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>{{ .Site.Title }}</title>
+
+		<meta name="author" content="Richard Kapička">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		{{ partial "assets.html" . }}
+	</head>
+	<body>
+		{{ partial "menu.html" . }}
+
+		<div class="content">
+			{{ block "main" .}}{{ end }}
+		</div>
+	</body>
+</html>

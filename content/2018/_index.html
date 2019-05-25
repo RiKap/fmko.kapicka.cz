@@ -1,0 +1,448 @@
+<!doctype html>
+<html class="no-js" lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>FM 2018</title>
+
+		<meta name="author" content="Richard Kapička">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		{{ partial "assets.html" . }}
+
+		<style type="text/css">
+			table {
+				margin: 0 auto;
+			}
+			table,
+			tr,
+			td {
+				vertical-align: middle !important;
+			}
+			table td {
+				padding: 0 5px 0 5px;
+				height: 30px;
+			}
+			table th {
+				padding: 0 5px 0 5px;
+				height: 30px;
+				font-weight: normal;
+			}
+			table input {
+				display: block;
+				width: 100%;
+				height: 30px;
+				padding: 7px 6px 7px 6px;
+				margin: 0px;
+				border: 0px;
+				outline: none;
+				box-sizing: border-box;
+				-webkit-box-sizing:border-box;
+				-moz-box-sizing: border-box;
+				font-size: 15px;
+			}
+			table .attribute tr td:last-child {
+				vertical-align: middle;
+				padding: 0px;
+			}
+			table tr.border-top > td {
+				border-top: 3px solid #000000;
+			}
+			table .star {
+				text-align: center;
+				font-weight: bold;
+				border-color: black;
+			}
+			table a {
+				padding: 0px 3px 0px 3px;
+				text-decoration: none;
+			}
+			table a:hover {
+				text-decoration: underline;
+			}
+			table .underline {
+				text-decoration: underline;
+				font-weight: bold;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				checkAttrInputs();
+				recountAttr();
+				setAttrColors();
+
+				$('table.attribute input').on('change', function() {
+					checkAttrInputs();
+					recountAttr();
+				});
+
+				$('.result.training a').on('click', function() {
+					var $this = $(this);
+
+					if ($this.hasClass('underline')) {
+						window.location.hash = '';
+						return false;
+					}
+				});
+
+				$(window).on('hashchange', function() {
+					setAttrColors();
+				});
+			});
+
+
+			function checkAttrInputs()
+			{
+				$('table.attribute input').each(function() {
+					var $this = $(this);
+
+					if (!$this.val()) {
+						$this.val(10);
+					}
+
+					if (isNaN($this.val())) {
+						$this.val(10);
+					}
+
+					if ($this.val() < 1) {
+						$this.val(1);
+					}
+
+					if ($this.val() > 20) {
+						$this.val(20);
+					}
+				});
+			}
+
+
+			function recountAttr()
+			{
+				var discipline = parseInt($('.attribute .discipline input').val()),
+					determination = parseInt($('.attribute .determination input').val()),
+					motivation = parseInt($('.attribute .motivation input').val()),
+					fitness = parseInt($('.attribute .fitness input').val()),
+					tactical = parseInt($('.attribute .tactical input').val()),
+					technical = parseInt($('.attribute .technical input').val()),
+					mental = parseInt($('.attribute .mental input').val()),
+					defending = parseInt($('.attribute .defending input').val()),
+					attacking = parseInt($('.attribute .attacking input').val()),
+					gk_distribution = parseInt($('.attribute .gk-distribution input').val()),
+					gk_handling = parseInt($('.attribute .gk-handling input').val()),
+					gk_shot_stopping = parseInt($('.attribute .gk-shot-stopping input').val());
+
+				var total_fitness = (discipline+determination+motivation);
+
+				$('.result .strength .star').text(getStarAmount(fitness*9+total_fitness*2));
+				$('.result .aerobic .star').text(getStarAmount(fitness*9+total_fitness*2));
+				$('.result .tactics .star').text(getStarAmount(tactical*6+mental*3+total_fitness*2));
+				$('.result .ball-control .star').text(getStarAmount(technical*6+mental*3+total_fitness*2));
+				$('.result .defending .star').text(getStarAmount(defending*6+tactical*3+total_fitness*2));
+				$('.result .attacking .star').text(getStarAmount(attacking*6+tactical*3+total_fitness*2));
+				$('.result .shooting .star').text(getStarAmount(technical*6+attacking*3+total_fitness*2));
+				$('.result .gk-distribution .star').text(getStarAmount(gk_distribution*9+total_fitness*2));
+				$('.result .gk-handling .star').text(getStarAmount(gk_handling*9+total_fitness*2));
+				$('.result .gk-shot-stopping .star').text(getStarAmount(gk_shot_stopping*9+total_fitness*2));
+			}
+
+
+			function setAttrColors()
+			{
+				$('table.training > tbody > tr').each(function() {
+					var $this = $(this).find('td.color').stop();
+
+					$this.css('background-color', '#' + $this.data('color'));
+				});
+
+				$('table.attribute > tbody > tr').each(function() {
+					var $this = $(this);
+
+					$this.css('background-color', '#FFFFFF');
+				});
+
+				$('.training a').removeClass('underline');
+
+				var strengthTraining = $('.training .strength .color'),
+					aerobicTraining = $('.training .aerobic .color'),
+					tacticsTraining = $('.training .tactics .color'),
+					ballControlTraining = $('.training .ball-control .color'),
+					defendingTraining = $('.training .defending .color'),
+					attackingTraining = $('.training .attacking .color'),
+					shootingTraining = $('.training .shooting .color'),
+					shotStoppingTraining = $('.training .shot-stopping .color'),
+					handlingTraining = $('.training .handling .color'),
+					gkDistributionTraining = $('.training .gk-distribution .color'),
+					gkHandlingTraining = $('.training .gk-handling .color'),
+					gkShotStoppingTraining = $('.training .gk-shot-stopping .color');
+
+				var disciplineAttr = $('.attribute .discipline'),
+					determinationAttr = $('.attribute .determination'),
+					motivationAttr = $('.attribute .motivation'),
+					fitnessAttr = $('.attribute .fitness'),
+					tacticalAttr = $('.attribute .tactical'),
+					technicalAttr = $('.attribute .technical'),
+					mentalAttr = $('.attribute .mental'),
+					defendingAttr = $('.attribute .defending'),
+					attackingAttr = $('.attribute .attacking'),
+					gkDistributionAttr = $('.attribute .gk-distribution'),
+					gkHandlingAttr = $('.attribute .gk-handling'),
+					gkShotStoppingAttr = $('.attribute .gk-shot-stopping');
+
+				/* Color is set by hash */
+				if (window.location.hash) {
+					var hash = window.location.hash.substring(1),
+						color = '';
+
+					if (hash === 'strength') {
+
+						color = ('#' + strengthTraining.data('color'));
+
+						fitnessAttr.css('background-color', color);
+
+					} else if (hash === 'aerobic') {
+
+						color = ('#' + aerobicTraining.data('color'));
+
+						fitnessAttr.css('background-color', color);
+
+					} else if (hash === 'tactics') {
+
+						color = ('#' + tacticsTraining.data('color'));
+
+						tacticalAttr.css('background-color', color);
+						mentalAttr.css('background-color', color);
+
+					} else if (hash === 'ball-control') {
+
+						color = ('#' + ballControlTraining.data('color'));
+
+						technicalAttr.css('background-color', color);
+						mentalAttr.css('background-color', color);
+
+					} else if (hash === 'defending') {
+
+						color = ('#' + defendingTraining.data('color'));
+
+						defendingAttr.css('background-color', color);
+						tacticalAttr.css('background-color', color);
+
+					} else if (hash === 'attacking') {
+
+						color = ('#' + attackingTraining.data('color'));
+
+						attackingAttr.css('background-color', color);
+						tacticalAttr.css('background-color', color);
+
+					} else if (hash === 'shooting') {
+
+						color = ('#' + shootingTraining.data('color'));
+
+						technicalAttr.css('background-color', color);
+						attackingAttr.css('background-color', color);
+
+					} else if (hash === 'gk-distribution') {
+
+						color = ('#' + gkDistributionTraining.data('color'));
+
+						gkDistributionAttr.css('background-color', color);
+
+					} else if (hash === 'gk-handling') {
+
+						color = ('#' + gkHandlingTraining.data('color'));
+
+						gkHandlingAttr.css('background-color', color);
+
+					} else if (hash === 'gk-shot-stopping') {
+
+						color = ('#' + gkShotStoppingTraining.data('color'));
+
+						gkShotStoppingAttr.css('background-color', color);
+
+					}
+
+					if (color) {
+						disciplineAttr.css('background-color', color);
+						determinationAttr.css('background-color', color);
+						motivationAttr.css('background-color', color);
+
+						$('.training a[href=#' + hash + ']').addClass('underline');
+					}
+				}
+			}
+
+
+			function getStarAmount(value)
+			{
+				if (value >= 270) {
+					return 5;
+				} else if (value >= 240) {
+					return 4.5;
+				} else if (value >= 210) {
+					return 4;
+				} else if (value >= 180) {
+					return 3.5;
+				} else if (value >= 150) {
+					return 3;
+				} else if (value >= 120) {
+					return 2.5;
+				} else if (value >= 90) {
+					return 2;
+				} else if (value >= 60) {
+					return 1.5;
+				} else if (value >= 30) {
+					return 1;
+				} else {
+					return 0.5;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		{{ partial "menu.html" . }}
+
+		<h1>FM 2018</h1>
+
+		<table>
+			<tr>
+				<td style="padding-right: 30px;">
+					<table class="attribute" style="border-collapse: collapse;" border="1">
+						<tbody>
+						<tr class="discipline">
+							<td>Disciplína:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="determination">
+							<td>Odhodlání:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="motivation">
+							<td>Motivace:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="fitness border-top">
+							<td>Fyzička:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="tactical">
+							<td>Taktika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="technical">
+							<td>Technika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="mental">
+							<td>Psychika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="defending">
+							<td>Obrana:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="attacking">
+							<td>Útok:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="gk-distribution border-top">
+							<td>GK - Chytání:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="gk-handling">
+							<td>GK - Rozehrávka:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="gk-shot-stopping">
+							<td>GK - Zastavování střel:</td>
+							<td><input type="number"></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+
+				<td style="vertical-align: top !important;">
+					<table class="result training" style="border-collapse: collapse;" border="1">
+						<thead>
+						<tr>
+							<th style="width: 180px;">Trénink</th>
+							<th>Počet hvězd</th>
+							<th>Barva</th>
+						</tr>
+						</thead>
+
+						<tbody>
+						<tr class="strength">
+							<td><a href="#strength">Kondice - Síla</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="ff2121"></td>
+						</tr>
+
+						<tr class="aerobic">
+							<td><a href="#aerobic">Kondice - Aerobik</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="42f2df"></td>
+						</tr>
+
+						<tr class="tactics border-top">
+							<td><a href="#tactics">Obecné - Taktika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="6de010"></td>
+						</tr>
+
+						<tr class="ball-control">
+							<td><a href="#ball-control">Obecné - Kontrola míče</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="7a94ff"></td>
+						</tr>
+
+						<tr class="defending">
+							<td><a href="#defending">Obecné - Bránění</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="fa9324"></td>
+						</tr>
+
+						<tr class="attacking">
+							<td><a href="#attacking">Obecné - Útok</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="fd28cd"></td>
+						</tr>
+
+						<tr class="shooting">
+							<td><a href="#shooting">Obecné - Střelba</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="8a9f69"></td>
+						</tr>
+
+						<tr class="gk-distribution border-top">
+							<td><a href="#gk-distribution">GK - Chytání</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="b94cca"></td>
+						</tr>
+
+						<tr class="gk-handling">
+							<td><a href="#gk-handling">GK - Rozehrávka</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="e2b734"></td>
+						</tr>
+
+						<tr class="gk-shot-stopping">
+							<td><a href="#gk-shot-stopping">GK - Zastavování střel</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="b89fa3"></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
