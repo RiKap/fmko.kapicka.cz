@@ -25,3 +25,61 @@ nav {
 h1 {
 	text-align: center;
 }
+
+table {
+	margin: 0 auto;
+
+	td {
+		padding: 0 5px 0 5px;
+		height: 30px;
+	}
+
+	th {
+		padding: 0 5px 0 5px;
+		height: 30px;
+		font-weight: normal;
+	}
+
+	input {
+		display: block;
+		width: 100%;
+		height: 30px;
+		padding: 7px 6px 7px 6px;
+		margin: 0px;
+		border: 0px;
+		outline: none;
+		box-sizing: border-box;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing: border-box;
+		font-size: 15px;
+	}
+
+	.attribute tr td:last-child {
+		vertical-align: middle;
+		padding: 0px;
+	}
+	.star {
+		text-align: center;
+		font-weight: bold;
+		border-color: black;
+	}
+	a {
+		padding: 0px 3px 0px 3px;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.underline {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+}
+
+table,
+tr,
+td {
+	vertical-align: middle !important;
+}
