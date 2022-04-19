@@ -2,7 +2,8 @@
 	<ul>
 		{{ $currentPage := . }}
 		{{ range .Site.Menus.main.ByName.Reverse }}
-			<a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+			{{ $active := or ($currentPage.IsMenuCurrent "main" .) (eq $currentPage.Section .Identifier) }}
+			<a href="{{ .URL }}" class="{{ if $active }}active{{ end }}">
 				{{ .Name }}
 			</a>
 		{{ end }}
