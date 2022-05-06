@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="no-js" lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>FM 2022</title>
+
+		<meta name="author" content="Richard Kapička">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		{{ partial "assets.html" . }}
+
+		<script type="text/javascript">
+			$(function() {
+				(new Fm2022()).init();
+			});
+		</script>
+	</head>
+	<body>
+		{{ partial "menu.html" . }}
+
+		<h1>FM 2022</h1>
+
+		<table>
+			<tr>
+				<td style="padding-right: 30px;">
+					<table class="attribute" style="border-collapse: collapse;" border="1">
+						<tr class="discipline">
+							<th rowspan="3" class="category">
+								Mentální<br>vlastnosti
+							</th>
+							<td>Disciplína:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="determination">
+							<td>Odhodlání:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="motivation">
+							<td>Motivace:</td>
+							<td><input type="number"></td>
+						</tr>
+						<!-- -->
+						<tr class="fitness border-top">
+							<th rowspan="6" class="category">
+								Obecné<br>vlastnosti
+							</th>
+							<td>Kondice:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="technical">
+							<td>Technika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="tactical">
+							<td>Taktika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="mental">
+							<td>Psychika:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="defending">
+							<td>Obrana:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="attacking">
+							<td>Útok:</td>
+							<td><input type="number"></td>
+						</tr>
+						<!-- -->
+						<tr class="goalkeepingDistribution border-top">
+							<th rowspan="3" class="category">
+								Brankářské<br>vlastnosti
+							</th>
+							<td>Chytání:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="goalkeepingHandling">
+							<td>Rozehrávka:</td>
+							<td><input type="number"></td>
+						</tr>
+
+						<tr class="goalkeepingShots">
+							<td>Zastavování střel:</td>
+							<td><input type="number"></td>
+						</tr>
+					</table>
+				</td>
+
+				<td style="vertical-align: top !important;">
+					<table class="result training" style="border-collapse: collapse;" border="1">
+						<tr>
+							<th></th>
+							<th style="width: 180px;">Trénink</th>
+							<th>Počet hvězd</th>
+							<th>Barva</th>
+						</tr>
+
+						<tr class="defendingTechnical">
+							<th rowspan="2" class="category">
+								Bránění
+							</th>
+							<td><a href="#defendingTechnical">Technika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="ff2121"></td>
+						</tr>
+
+						<tr class="defendingTactical">
+							<td><a href="#defendingTactical">Taktika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="42f2df"></td>
+						</tr>
+
+						<tr class="possessionTechnical border-top">
+							<th rowspan="2" class="category">
+								Držení míče
+							</th>
+							<td><a href="#possessionTechnical">Technika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="6de010"></td>
+						</tr>
+
+						<tr class="possessionTactical">
+							<td><a href="#possessionTactical">Taktika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="7a94ff"></td>
+						</tr>
+
+						<tr class="attackingTechnical border-top">
+							<th rowspan="2" class="category">
+								Útočení
+							</th>
+							<td><a href="#attackingTechnical">Technika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="fa9324"></td>
+						</tr>
+
+						<tr class="attackingTactical">
+							<td><a href="#attackingTactical">Taktika</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="fd28cd"></td>
+						</tr>
+
+						<tr class="goalkeepingShots border-top">
+							<th rowspan="2" class="category">
+								Brankáři
+							</th>
+							<td><a href="#goalkeepingShots">Zastavování střel</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="8a9f69"></td>
+						</tr>
+
+						<tr class="goalkeepingHd">
+							<td><a href="#goalkeepingHd">Chytání a rozehrávka</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="b94cca"></td>
+						</tr>
+
+						<tr class="fitnessStrength border-top">
+							<th rowspan="2" class="category">
+								Kondice
+							</th>
+							<td><a href="#fitnessStrength">Síla</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="e2b734"></td>
+						</tr>
+
+						<tr class="fitnessQuickness">
+							<td><a href="#fitnessQuickness">Rychlost</a></td>
+							<td class="star"></td>
+							<td class="color" data-color="b89fa3"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

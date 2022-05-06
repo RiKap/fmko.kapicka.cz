@@ -8,7 +8,7 @@ enableEmoji = true
 
 [menu]
   [[menu.main]]
-  	identifier = "2013"
+    identifier = "2013"
     name = "2013"
     url = "/2013/"
   [[menu.main]]
@@ -19,3 +19,7 @@ enableEmoji = true
     identifier = "2018"
     name = "2018"
     url = "/2018/"
+  [[menu.main]]
+    identifier = "2022"
+    name = "2022"
+    url = "/2022/"
