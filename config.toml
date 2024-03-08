@@ -2,7 +2,7 @@ baseURL = "https://fmko.kapicka.cz"
 languageCode = "en-US"
 title = "Fmko"
 enableGitInfo = false
-disableKinds = ["taxonomyTerm"]
+disableKinds = ["taxonomy"]
 disableHugoGeneratorInject = true
 enableEmoji = true
 

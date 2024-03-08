@@ -1,20 +1,17 @@
-class Fm2013
-{
-
-	init()
-	{
+class Fm2013 {
+	init() {
 		var self = this;
 
 		this.checkAttrInputs();
 		this.recountAttr();
 		this.setAttrColors();
 
-		$('table.attribute input').on('change', function() {
+		$('table.attribute input').on('change', function () {
 			self.checkAttrInputs();
 			self.recountAttr();
 		});
 
-		$('.result.training a').on('click', function() {
+		$('.result.training a').on('click', function () {
 			var $this = $(this);
 
 			if ($this.hasClass('underline')) {
@@ -23,15 +20,13 @@ class Fm2013
 			}
 		});
 
-		$(window).on('hashchange', function() {
+		$(window).on('hashchange', function () {
 			self.setAttrColors();
 		});
 	}
 
-
-	checkAttrInputs()
-	{
-		$('table.attribute input').each(function() {
+	checkAttrInputs() {
+		$('table.attribute input').each(function () {
 			var $this = $(this);
 
 			if (!$this.val()) {
@@ -52,11 +47,11 @@ class Fm2013
 		});
 	}
 
-
-	recountAttr()
-	{
+	recountAttr() {
 		var discipline = parseInt($('.attribute .discipline input').val()),
-			determination = parseInt($('.attribute .determination input').val()),
+			determination = parseInt(
+				$('.attribute .determination input').val(),
+			),
 			motivation = parseInt($('.attribute .motivation input').val()),
 			fitness = parseInt($('.attribute .fitness input').val()),
 			goalkeepers = parseInt($('.attribute .goalkeepers input').val()),
@@ -66,20 +61,111 @@ class Fm2013
 			defending = parseInt($('.attribute .defending input').val()),
 			attacking = parseInt($('.attribute .attacking input').val());
 
-		$('.result .strength .star').text(this.getStarAmount(this.getCoachScore(discipline*2+motivation*2+fitness*9+determination*2, 300)));
-		$('.result .aerobic .star').text(this.getStarAmount(this.getCoachScore(discipline*2+motivation*2+fitness*9+determination*2, 300)));
-		$('.result .tactics .star').text(this.getStarAmount(this.getCoachScore(discipline*1+motivation*1+determination*1+tactical*2, 100)));
-		$('.result .ball-control .star').text(this.getStarAmount(this.getCoachScore(discipline*2+motivation*2+mental*3+determination*2+technical*6, 300)));
-		$('.result .defending .star').text(this.getStarAmount(this.getCoachScore(defending*8+discipline*3+motivation*3+determination*3+tactical*3, 400)));
-		$('.result .attacking .star').text(this.getStarAmount(this.getCoachScore(attacking*6+discipline*2+determination*2+tactical*3, 300)));
-		$('.result .shooting .star').text(this.getStarAmount(this.getCoachScore(attacking*3+discipline*2+motivation*2+determination*2+technical*6, 300)));
-		$('.result .shot-stopping .star').text(this.getStarAmount(this.getCoachScore(discipline*1+goalkeepers*2+motivation*1+determination*1, 100)));
-		$('.result .handling .star').text(this.getStarAmount(this.getCoachScore(discipline*1+goalkeepers*2+motivation*1+determination*1, 100)));
+		$('.result .strength .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 2 +
+						motivation * 2 +
+						fitness * 9 +
+						determination * 2,
+					300,
+				),
+			),
+		);
+		$('.result .aerobic .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 2 +
+						motivation * 2 +
+						fitness * 9 +
+						determination * 2,
+					300,
+				),
+			),
+		);
+		$('.result .tactics .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 1 +
+						motivation * 1 +
+						determination * 1 +
+						tactical * 2,
+					100,
+				),
+			),
+		);
+		$('.result .ball-control .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 2 +
+						motivation * 2 +
+						mental * 3 +
+						determination * 2 +
+						technical * 6,
+					300,
+				),
+			),
+		);
+		$('.result .defending .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					defending * 8 +
+						discipline * 3 +
+						motivation * 3 +
+						determination * 3 +
+						tactical * 3,
+					400,
+				),
+			),
+		);
+		$('.result .attacking .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					attacking * 6 +
+						discipline * 2 +
+						determination * 2 +
+						tactical * 3,
+					300,
+				),
+			),
+		);
+		$('.result .shooting .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					attacking * 3 +
+						discipline * 2 +
+						motivation * 2 +
+						determination * 2 +
+						technical * 6,
+					300,
+				),
+			),
+		);
+		$('.result .shot-stopping .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 1 +
+						goalkeepers * 2 +
+						motivation * 1 +
+						determination * 1,
+					100,
+				),
+			),
+		);
+		$('.result .handling .star').text(
+			this.getStarAmount(
+				this.getCoachScore(
+					discipline * 1 +
+						goalkeepers * 2 +
+						motivation * 1 +
+						determination * 1,
+					100,
+				),
+			),
+		);
 	}
 
-
-	setAttrColors()
-	{
+	setAttrColors() {
 		/* Set colors for training table */
 		var strengthTraining = $('.training .strength .color'),
 			aerobicTraining = $('.training .aerobic .color'),
@@ -91,15 +177,42 @@ class Fm2013
 			shotStoppingTraining = $('.training .shot-stopping .color'),
 			handlingTraining = $('.training .handling .color');
 
-		strengthTraining.css('background-color', ('#' + strengthTraining.data('color')));
-		aerobicTraining.css('background-color', ('#' + aerobicTraining.data('color')));
-		tacticsTraining.css('background-color', ('#' + tacticsTraining.data('color')));
-		ballControlTraining.css('background-color', ('#' + ballControlTraining.data('color')));
-		defendingTraining.css('background-color', ('#' + defendingTraining.data('color')));
-		attackingTraining.css('background-color', ('#' + attackingTraining.data('color')));
-		shootingTraining.css('background-color', ('#' + shootingTraining.data('color')));
-		shotStoppingTraining.css('background-color', ('#' + shotStoppingTraining.data('color')));
-		handlingTraining.css('background-color', ('#' + handlingTraining.data('color')));
+		strengthTraining.css(
+			'background-color',
+			'#' + strengthTraining.data('color'),
+		);
+		aerobicTraining.css(
+			'background-color',
+			'#' + aerobicTraining.data('color'),
+		);
+		tacticsTraining.css(
+			'background-color',
+			'#' + tacticsTraining.data('color'),
+		);
+		ballControlTraining.css(
+			'background-color',
+			'#' + ballControlTraining.data('color'),
+		);
+		defendingTraining.css(
+			'background-color',
+			'#' + defendingTraining.data('color'),
+		);
+		attackingTraining.css(
+			'background-color',
+			'#' + attackingTraining.data('color'),
+		);
+		shootingTraining.css(
+			'background-color',
+			'#' + shootingTraining.data('color'),
+		);
+		shotStoppingTraining.css(
+			'background-color',
+			'#' + shotStoppingTraining.data('color'),
+		);
+		handlingTraining.css(
+			'background-color',
+			'#' + handlingTraining.data('color'),
+		);
 
 		/* Set colors for attribute table */
 		var disciplineAttr = $('.attribute .discipline'),
@@ -133,66 +246,47 @@ class Fm2013
 				color = '';
 
 			if (hash === 'strength') {
-
-				color = ('#' + strengthTraining.data('color'));
+				color = '#' + strengthTraining.data('color');
 
 				fitnessAttr.css('background-color', color);
-
 			} else if (hash === 'aerobic') {
-
-				color = ('#' + aerobicTraining.data('color'));
+				color = '#' + aerobicTraining.data('color');
 
 				fitnessAttr.css('background-color', color);
-
 			} else if (hash === 'tactics') {
-
-				color = ('#' + tacticsTraining.data('color'));
+				color = '#' + tacticsTraining.data('color');
 
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'ball-control') {
-
-				color = ('#' + ballControlTraining.data('color'));
+				color = '#' + ballControlTraining.data('color');
 
 				technicalAttr.css('background-color', color);
 				mentalAttr.css('background-color', color);
-
 			} else if (hash === 'defending') {
-
-				color = ('#' + defendingTraining.data('color'));
+				color = '#' + defendingTraining.data('color');
 
 				defendingAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
-
 			} else if (hash === 'attacking') {
-
-				color = ('#' + attackingTraining.data('color'));
+				color = '#' + attackingTraining.data('color');
 
 				attackingAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'shooting') {
-
-				color = ('#' + shootingTraining.data('color'));
+				color = '#' + shootingTraining.data('color');
 
 				technicalAttr.css('background-color', color);
 				attackingAttr.css('background-color', color);
-
 			} else if (hash === 'shot-stopping') {
-
-				color = ('#' + shotStoppingTraining.data('color'));
+				color = '#' + shotStoppingTraining.data('color');
 
 				goalkeepersAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'handling') {
-
-				color = ('#' + handlingTraining.data('color'));
+				color = '#' + handlingTraining.data('color');
 
 				goalkeepersAttr.css('background-color', color);
 				technicalAttr.css('background-color', color);
-
 			}
 
 			if (color) {
@@ -205,46 +299,42 @@ class Fm2013
 		}
 	}
 
-
-	getCoachScore(value, maxValue)
-	{
-		return (value / maxValue) * 100;
+	getCoachScore(value, maxValue) {
+		return Math.floor((value / maxValue) * 100);
 	}
 
-
-	getStarAmount(number)
-	{
+	getStarAmount(number) {
 		var result;
 
 		switch (true) {
-			case (number >= 5 && number <= 9):
+			case number >= 5 && number <= 9:
 				result = 0.5;
 				break;
-			case (number >= 10 && number <= 19):
+			case number >= 10 && number <= 19:
 				result = 1;
 				break;
-			case (number >= 20 && number <= 29):
+			case number >= 20 && number <= 29:
 				result = 1.5;
 				break;
-			case (number >= 30 && number <= 39):
+			case number >= 30 && number <= 39:
 				result = 2;
 				break;
-			case (number >= 40 && number <= 49):
+			case number >= 40 && number <= 49:
 				result = 2.5;
 				break;
-			case (number >= 50 && number <= 59):
+			case number >= 50 && number <= 59:
 				result = 3;
 				break;
-			case (number >= 60 && number <= 69):
+			case number >= 60 && number <= 69:
 				result = 3.5;
 				break;
-			case (number >= 70 && number <= 79):
+			case number >= 70 && number <= 79:
 				result = 4;
 				break;
-			case (number >= 80 && number <= 89):
+			case number >= 80 && number <= 89:
 				result = 4.5;
 				break;
-			case (number >= 90):
+			case number >= 90:
 				result = 5;
 				break;
 			default:
@@ -254,5 +344,7 @@ class Fm2013
 
 		return result;
 	}
-
 }
+
+let Fmko = (window.Fmko = window.Fmko || {});
+Fmko.Fm2013 = Fmko.Fm2013 || new Fm2013();

@@ -1,20 +1,17 @@
-class Fm2022
-{
-
-	init()
-	{
+class Fm2022 {
+	init() {
 		var self = this;
 
 		this.checkAttrInputs();
 		this.recountAttr();
 		this.setAttrColors();
 
-		$('table.attribute input').on('change keyup', function() {
+		$('table.attribute input').on('change keyup', function () {
 			self.checkAttrInputs();
 			self.recountAttr();
 		});
 
-		$('.result.training a').on('click', function() {
+		$('.result.training a').on('click', function () {
 			var $this = $(this);
 
 			if ($this.hasClass('underline')) {
@@ -23,15 +20,13 @@ class Fm2022
 			}
 		});
 
-		$(window).on('hashchange', function() {
+		$(window).on('hashchange', function () {
 			self.setAttrColors();
 		});
 	}
 
-
-	checkAttrInputs()
-	{
-		$('table.attribute input').each(function() {
+	checkAttrInputs() {
+		$('table.attribute input').each(function () {
 			var $this = $(this);
 
 			if (!$this.val()) {
@@ -52,11 +47,11 @@ class Fm2022
 		});
 	}
 
-
-	recountAttr()
-	{
+	recountAttr() {
 		var discipline = parseInt($('.attribute .discipline input').val()),
-			determination = parseInt($('.attribute .determination input').val()),
+			determination = parseInt(
+				$('.attribute .determination input').val(),
+			),
 			motivation = parseInt($('.attribute .motivation input').val()),
 			fitness = parseInt($('.attribute .fitness input').val()),
 			tactical = parseInt($('.attribute .tactical input').val()),
@@ -64,34 +59,60 @@ class Fm2022
 			mental = parseInt($('.attribute .mental input').val()),
 			defending = parseInt($('.attribute .defending input').val()),
 			attacking = parseInt($('.attribute .attacking input').val()),
-			goalkeepingDistribution = parseInt($('.attribute .goalkeepingDistribution input').val()),
-			goalkeepingHandling = parseInt($('.attribute .goalkeepingHandling input').val()),
-			goalkeepingShots = parseInt($('.attribute .goalkeepingShots input').val());
+			goalkeepingDistribution = parseInt(
+				$('.attribute .goalkeepingDistribution input').val(),
+			),
+			goalkeepingHandling = parseInt(
+				$('.attribute .goalkeepingHandling input').val(),
+			),
+			goalkeepingShots = parseInt(
+				$('.attribute .goalkeepingShots input').val(),
+			);
 
 		var ddm = discipline + determination + motivation;
 
-		$('.training .defendingTechnical .star').text(this.getStarAmount(defending*6 + technical*3 + ddm*2));
-		$('.training .defendingTactical .star').text(this.getStarAmount(defending*6 + tactical*3 + ddm*2));
-		$('.training .possessionTechnical .star').text(this.getStarAmount(mental*6 + technical*3 + ddm*2));
-		$('.training .possessionTactical .star').text(this.getStarAmount(mental*6 + tactical*3 + ddm*2));
-		$('.training .attackingTechnical .star').text(this.getStarAmount(attacking*6 + technical*3 + ddm*2));
-		$('.training .attackingTactical .star').text(this.getStarAmount(attacking*6 + tactical*3 + ddm*2));
-		$('.training .goalkeepingShots .star').text(this.getStarAmount(goalkeepingShots*9 + ddm*2));
-		$('.training .goalkeepingHd .star').text(this.getStarAmount(goalkeepingHandling*6 + goalkeepingDistribution*3 + ddm*2));
-		$('.training .fitnessStrength .star').text(this.getStarAmount(fitness*9 + ddm*2));
-		$('.training .fitnessQuickness .star').text(this.getStarAmount(fitness*9 + ddm*2));
+		$('.training .defendingTechnical .star').text(
+			this.getStarAmount(defending * 6 + technical * 3 + ddm * 2),
+		);
+		$('.training .defendingTactical .star').text(
+			this.getStarAmount(defending * 6 + tactical * 3 + ddm * 2),
+		);
+		$('.training .possessionTechnical .star').text(
+			this.getStarAmount(mental * 6 + technical * 3 + ddm * 2),
+		);
+		$('.training .possessionTactical .star').text(
+			this.getStarAmount(mental * 6 + tactical * 3 + ddm * 2),
+		);
+		$('.training .attackingTechnical .star').text(
+			this.getStarAmount(attacking * 6 + technical * 3 + ddm * 2),
+		);
+		$('.training .attackingTactical .star').text(
+			this.getStarAmount(attacking * 6 + tactical * 3 + ddm * 2),
+		);
+		$('.training .goalkeepingShots .star').text(
+			this.getStarAmount(goalkeepingShots * 9 + ddm * 2),
+		);
+		$('.training .goalkeepingHd .star').text(
+			this.getStarAmount(
+				goalkeepingHandling * 6 + goalkeepingDistribution * 3 + ddm * 2,
+			),
+		);
+		$('.training .fitnessStrength .star').text(
+			this.getStarAmount(fitness * 9 + ddm * 2),
+		);
+		$('.training .fitnessQuickness .star').text(
+			this.getStarAmount(fitness * 9 + ddm * 2),
+		);
 	}
 
-
-	setAttrColors()
-	{
-		$('table.training > tbody > tr').each(function() {
+	setAttrColors() {
+		$('table.training > tbody > tr').each(function () {
 			var $this = $(this).find('td.color').stop();
 
 			$this.css('background-color', '#' + $this.data('color'));
 		});
 
-		$('table.attribute > tbody > tr > td').each(function() {
+		$('table.attribute > tbody > tr > td').each(function () {
 			var $this = $(this);
 
 			$this.css('background-color', '#FFFFFF');
@@ -99,12 +120,24 @@ class Fm2022
 
 		$('.training a').removeClass('underline');
 
-		var defendingTechnicalTraining = $('.training .defendingTechnical .color'),
-			defendingTacticalTraining = $('.training .defendingTactical .color'),
-			possessionTechnicalTraining = $('.training .possessionTechnical .color'),
-			possessionTacticalTraining = $('.training .possessionTactical .color'),
-			attackingTechnicalTraining = $('.training .attackingTechnical .color'),
-			attackingTacticalTraining = $('.training .attackingTactical .color'),
+		var defendingTechnicalTraining = $(
+				'.training .defendingTechnical .color',
+			),
+			defendingTacticalTraining = $(
+				'.training .defendingTactical .color',
+			),
+			possessionTechnicalTraining = $(
+				'.training .possessionTechnical .color',
+			),
+			possessionTacticalTraining = $(
+				'.training .possessionTactical .color',
+			),
+			attackingTechnicalTraining = $(
+				'.training .attackingTechnical .color',
+			),
+			attackingTacticalTraining = $(
+				'.training .attackingTactical .color',
+			),
 			goalkeepingShotsTraining = $('.training .goalkeepingShots .color'),
 			goalkeepingHdTraining = $('.training .goalkeepingHd .color'),
 			fitnessStrengthTraining = $('.training .fitnessStrength .color'),
@@ -119,7 +152,9 @@ class Fm2022
 			mentalAttr = $('.attribute .mental td'),
 			defendingAttr = $('.attribute .defending td'),
 			attackingAttr = $('.attribute .attacking td'),
-			goalkeepingDistributionAttr = $('.attribute .goalkeepingDistribution td'),
+			goalkeepingDistributionAttr = $(
+				'.attribute .goalkeepingDistribution td',
+			),
 			goalkeepingHandlingAttr = $('.attribute .goalkeepingHandling td'),
 			goalkeepingShotsAttr = $('.attribute .goalkeepingShots td');
 
@@ -129,72 +164,52 @@ class Fm2022
 				color = '';
 
 			if (hash === 'defendingTechnical') {
-
-				color = ('#' + defendingTechnicalTraining.data('color'));
+				color = '#' + defendingTechnicalTraining.data('color');
 
 				defendingAttr.css('background-color', color);
 				technicalAttr.css('background-color', color);
-
 			} else if (hash === 'defendingTactical') {
-
-				color = ('#' + defendingTacticalTraining.data('color'));
+				color = '#' + defendingTacticalTraining.data('color');
 
 				defendingAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'possessionTechnical') {
-
-				color = ('#' + possessionTechnicalTraining.data('color'));
+				color = '#' + possessionTechnicalTraining.data('color');
 
 				mentalAttr.css('background-color', color);
 				technicalAttr.css('background-color', color);
-
 			} else if (hash === 'possessionTactical') {
-
-				color = ('#' + possessionTacticalTraining.data('color'));
+				color = '#' + possessionTacticalTraining.data('color');
 
 				mentalAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'attackingTechnical') {
-
-				color = ('#' + attackingTechnicalTraining.data('color'));
+				color = '#' + attackingTechnicalTraining.data('color');
 
 				attackingAttr.css('background-color', color);
 				technicalAttr.css('background-color', color);
-
 			} else if (hash === 'attackingTactical') {
-
-				color = ('#' + attackingTacticalTraining.data('color'));
+				color = '#' + attackingTacticalTraining.data('color');
 
 				attackingAttr.css('background-color', color);
 				tacticalAttr.css('background-color', color);
-
 			} else if (hash === 'goalkeepingShots') {
-
-				color = ('#' + goalkeepingShotsTraining.data('color'));
+				color = '#' + goalkeepingShotsTraining.data('color');
 
 				goalkeepingShotsAttr.css('background-color', color);
-
 			} else if (hash === 'goalkeepingHd') {
-
-				color = ('#' + goalkeepingHdTraining.data('color'));
+				color = '#' + goalkeepingHdTraining.data('color');
 
 				goalkeepingDistributionAttr.css('background-color', color);
 				goalkeepingHandlingAttr.css('background-color', color);
-
 			} else if (hash === 'fitnessStrength') {
-
-				color = ('#' + fitnessStrengthTraining.data('color'));
+				color = '#' + fitnessStrengthTraining.data('color');
 
 				fitnessAttr.css('background-color', color);
-
 			} else if (hash === 'fitnessQuickness') {
-
-				color = ('#' + fitnessQuicknessTraining.data('color'));
+				color = '#' + fitnessQuicknessTraining.data('color');
 
 				fitnessAttr.css('background-color', color);
-
 			}
 
 			if (color) {
@@ -207,9 +222,7 @@ class Fm2022
 		}
 	}
 
-
-	getStarAmount(value)
-	{
+	getStarAmount(value) {
 		if (value >= 270) {
 			return 5;
 		} else if (value >= 240) {
@@ -232,5 +245,7 @@ class Fm2022
 			return 0.5;
 		}
 	}
-
 }
+
+let Fmko = (window.Fmko = window.Fmko || {});
+Fmko.Fm2022 = Fmko.Fm2022 || new Fm2022();

@@ -10,9 +10,11 @@
 
 		{{ partial "assets.html" . }}
 
-		<script type="text/javascript">
+		<script src="/js/fm/2018.js?{{ readFile "/static/js/fm/2018.js" | md5}}" type="module"></script>
+
+		<script type="module">
 			$(function() {
-				(new Fm2018()).init();
+				window.Fmko.Fm2018.init();
 			});
 		</script>
 	</head>
